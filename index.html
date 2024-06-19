@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiro Site com JS</title>
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header .theme-toggle {
+            cursor: pointer;
+            padding: 10px 20px;
+            border: none;
+            background: #000000;
+            color: white;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+        }
+
+        header .theme-toggle:hover {
+            background: #0d1c17;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero {
+            background: url('https://studioartemis.co/lp-florianopolis/wp-content/uploads/2022/06/01-scaled.jpg') no-repeat center center/cover;
+            width: 100%;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 8px rgb(47, 8, 77);
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .member {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            width: calc(33.333% - 20px);
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .member:hover {
+            transform: translateY(-10px);
+            background-color: #f0f0f0;
+        }
+
+        .member img {
+            width: 100%;
+            height: auto;
+        }
+
+        .member h3 {
+            font-size: 1.5em;
+            margin: 15px 0;
+            color: #444;
+        }
+
+        .member p {
+            font-size: 1em;
+            margin: 0 15px 15px;
+            color: #777;
+        }
+
+        footer {
+            background-color: #000000;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .member {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .member {
+                width: calc(100% - 20px);
+            }
+        }
+
+        /* Cores baseadas em um Pitbull */
+        :root {
+            --primary-color: #0e323a;
+            --secondary-color: #0c4073;
+            --accent-color: #000000;
+        }
+
+        /* Estilo do Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1></h1>
+        <button class="theme-toggle" onclick="toggleTheme()">Trocar Tema</button>
+    </header>
+    <main>
+        <div class="hero">
+            <h1>Primeiro Site com JS</h1>
+        </div>
+        <section id="members">
+            <h2></h2>
+            <div class="member" onclick="openModal('Lucas Teixeira')">
+                <img src="WhatsApp Image 2024-06-17 at 23.57.22 (1).jpeg" alt="Membro 1">
+                <h3>Lucas Teixeira</h3>
+                <p>. . .</p>
+            </div>
+            <div class="member" onclick="openModal('Iago Sanches')">
+                <img src="WhatsApp Image 2024-06-17 at 23.59.13.jpeg" alt="Membro 3">
+                <h3>Iago Sanches</h3>
+                <p>. . . </p>
+            </div>
+            <div class="member" onclick="openModal('Gabriel Mendes')">
+                <img src="WhatsApp Image 2024-06-17 at 23.59.14.jpeg" alt="Membro 4">
+                <h3>Gabriel Mendes</h3>
+                <p>. . . </p>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Rodrigão. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, description) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                document.getElementById('myModal').style.display = 'none';
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+            const members = document.querySelectorAll('.member');
+
+            if (body.style.backgroundColor === 'black') {
+                body.style.backgroundColor = '#fafafa';
+                body.style.color = '#333';
+                header.style.backgroundColor = '#005f73';
+                footer.style.backgroundColor = '#005f73';
+                members.forEach(member => member.style.backgroundColor = 'white');
+            } else {
+                body.style.backgroundColor = 'black';
+                body.style.color = 'white';
+                header.style.backgroundColor = 'black';
+                footer.style.backgroundColor = 'black';
+                members.forEach(member => member.style.backgroundColor = '#333');
+            }
+        }
+    </script>
+</body>
+</html>
